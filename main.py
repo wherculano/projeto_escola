@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
@@ -40,7 +42,7 @@ def get_aluno_by_id(aluno_id: int, db: Session = Depends(get_db)):
     return db_aluno
 
 # Get all alunos
-@app.get("/alunos/", response_model=list[Aluno])
+@app.get("/alunos/", response_model=List[Aluno])
 def get_all_alunos(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     alunos = get_alunos(db, skip, limit)
     return alunos
